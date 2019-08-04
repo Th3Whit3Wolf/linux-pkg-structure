@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Glossary - Linux Packaging Structure</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../Introduction/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li><a href="../Introduction/glossary.html" class="active"><strong aria-hidden="true">1.1.</strong> Glossary</a></li></ol></li><li><a href="../Pkg-Fmt/index.html"><strong aria-hidden="true">2.</strong> Package Formats</a></li><li><ol class="section"><li><a href="../Pkg-Fmt/alp.html"><strong aria-hidden="true">2.1.</strong> Arch Linux Packages</a></li><li><a href="../Pkg-Fmt/deb.html"><strong aria-hidden="true">2.2.</strong> Debian Packages</a></li><li><a href="../Pkg-Fmt/gen2.html"><strong aria-hidden="true">2.3.</strong> Gentoo/Sabayon Packages</a></li><li><a href="../Pkg-Fmt/rpm.html"><strong aria-hidden="true">2.4.</strong> RPM Packages</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Linux Packaging Structure</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#glossary" id="glossary">Glossary</a></h1>
+<h2><a class="header" href="#basic-definitions" id="basic-definitions">Basic Definitions</a></h2>
+<h3><a class="header" href="#hardware" id="hardware">Hardware</a></h3>
+<p>A computer’s <strong>hardware</strong> comprises the physical components of the computer, like its <strong>hard drive</strong> (or <strong>hard disk drive</strong> [<strong>HDD</strong>]) on which information is stored (analogous to a person’s long-term memory), <strong>random-access memory</strong> (<strong>RAM</strong>) devices (analogous to someone’s working memory) and <strong>central processing unit</strong> (<strong>CPU</strong>) or processor (which is where information processing is done, this processing is analogous to a person’s thoughts). The term “computer architecture” or “<strong>instruction set architecture</strong>” (<strong>ISA</strong>) refers to the set of instructions that the CPU, in question, can understand.</p>
+<h3><a class="header" href="#software" id="software">Software</a></h3>
+<p>A computer’s software are the non-physical components to the computer, which are stored in the computer’s hard drive. It includes the data stored on the hard drive like one’s files as well as the computer programs, which are more or less just instructions for the computer’s processor. For example, as I am writing this post I am using the Atom text editor, which is a computer program.</p>
+<h3><a class="header" href="#source-code" id="source-code">Source Code</a></h3>
+<p><strong>Source code</strong> is a collection of computer instructions written in at least one human-readable computer language. The type of computer language most frequently-used to write computer programs are so called “programming languages” such as C, C++, Python, etc. Other common computer languages sometimes used to write computer programs (usually alongside programming languages) include markup languages (like HTML and Markdown) and style sheet languages (like CSS). For example, the Atom text editor is written in CoffeeScript, HTML, JavaScript and CSS, where CoffeeScript and JavaScript are programming languages.</p>
+<h3><a class="header" href="#free-and-open-source-software" id="free-and-open-source-software">Free and Open-Source Software</a></h3>
+<p><strong>Free and open-source software</strong> (<strong>FOSS</strong>) refers to software who’s source code is licensed such that it can freely shared, distributed, studied and even modified and re-released by anyone. FOSS licenses usually require that anyone that modifies and re-releases the source code gives some recognition to the original authors of the source code and some licenses (which are called <strong>copyleft</strong> licenses) even require that the modified source code be released under a similar (if not identical) license to the original source code. The most popular copyleft license is the GNU General Public License (GPL), while the most popular non-copyleft (or <strong>permissive</strong>) FOSS licenses include the BSD licenses and the MIT License.</p>
+<h3><a class="header" href="#proprietary-software" id="proprietary-software">Proprietary Software</a></h3>
+<p><strong>Proprietary software</strong> (<strong>PS</strong>) refers to software who’s source code is licensed such that it cannot be freely and legally shared. PS is usually, for charge, that is you have to pay to use them. Although some PS is so called “freeware”, in other words, you can use it for free, but you cannot freely and legally access the program’s source code.</p>
+<h3><a class="header" href="#fork" id="fork">Fork</a></h3>
+<p>A <strong>fork</strong> or <strong>project fork</strong>, is when developers take a copy of the source code from one software project and start independently working on it (or developing it) themselves. In the FOSS world this is commonplace due to the relative lack of restrictions imposed by FOSS licenses.</p>
+<h3><a class="header" href="#downstream--upstream" id="downstream--upstream">Downstream / Upstream</a></h3>
+<p>The terms <strong>downstream</strong> and <strong>upstream</strong> refers to the direction from and toward the original authors or maintainers of software that is distributed as source code, respectively.</p>
+<h3><a class="header" href="#back-end--front-end" id="back-end--front-end">Back-End / Front-End</a></h3>
+<p>The terms <strong>back-end</strong> and <strong>front-end</strong> are used together to refer to a relationship between two programs. The front-end program runs the back-end program in the background (often without the user noticing), to perform a specified action (usually package management on this site), but usually the front-end has some higher-level features that it brings to the table, that the back-end program lacks. Quite often, on this site, I will refer to graphical package managers as being front-ends for a command-line package manager, which the graphical package manager will run in the background. What the graphical package manager brings to the table is a more intuitive user interface.</p>
+<h3><a class="header" href="#operating-system" id="operating-system">Operating System</a></h3>
+<p>An <strong>operating system</strong> (<strong>OS</strong>) is the base set of system software that forms the foundation for other programs to run on top of. It manages all communication between the computer’s hardware and the application software that run on top of it. At its heart, each OS has what is known as a kernel, which manages all communication with the computer’s hardware. Notable examples of operating systems, include:</p>
+<ul>
+<li>FreeBSD</li>
+<li>Linux</li>
+<li>Mac OS</li>
+<li>MS-DOS</li>
+<li>OS X</li>
+<li>Windows 1.0 to Windows ME (including Windows 95 and 98)</li>
+<li>Windows NT (including Windows XP, Vista, 7, 8, 10, etc)</li>
+</ul>
+<h3><a class="header" href="#kernel" id="kernel">Kernel</a></h3>
+<p>An operating system <strong>kernel</strong> is the piece of system software that manages all communication between a computer’s hardware and its software. Most kernels also perform virtual memory allocation. Some of this virtual memory is allocated to the kernel (which is called <strong>kernel mode</strong>), the rest is allocated to the user’s processes (or <strong>user mode</strong>, application software run in user mode). It is in many ways the operating system’s brain, without it the OS will not work. There are three main types of operating system kernel, based on their respective design:</p>
+<ul>
+<li>
+<p><strong>Hybrid kernel</strong> — as its name suggest it is mid-way between the below designs. Examples include the kernels of OS X and Windows NT. Linus Torvalds, the lead and original developer of the Linux kernel, amongst others, believe that the <strong>hybrid kernel</strong> category is purely marketing and that these kernels fit quite easily into one of the following two categories.</p>
+</li>
+<li>
+<p><strong>Microkernel</strong> (or <strong>μkernel</strong>) — kernels that keep as few processes running in kernel mode as possible. They, as their name suggest, usually do the bare minimum needed of a kernel. Consequently, the number of lines of code in their source code is usually substantially less than their monolithic counterparts. Extreme variants of microkernels include nanokernels and picokernels, which have even fewer lines of source code. The most notable example is MINIX.</p>
+</li>
+<li>
+<p><strong>Monolithic kernel</strong> — these are kernels that perform all operating system functions in kernel mode. They usually consist of far more lines of code than their microkernel counterparts. The most notable examples are the FreeBSD, Linux, NetBSD and OpenBSD kernels.</p>
+</li>
+</ul>
+<p>Microkernels are easier for software developers to work on and are supposedly more easily portable to additional instruction set architectures (ISAs). Despite this, the monolithic Linux kernel has been ported to the greatest number of ISAs of any operating system kernel.</p>
+<h3><a class="header" href="#unix" id="unix">Unix</a></h3>
+<p><strong>Unix</strong> (or <strong>UNIX</strong> for the trademark) is a family of operating systems that share several common characteristics and are certified as being compliant to at least one version of the <strong>Single UNIX Specification</strong> (<strong>SUS</strong>). These common characteristics are best summarized with what is sometimes called the “<strong>Unix philosophy</strong>”. The Unix philosophy is that the operating system provides a set of simple command-line tools or utilities (which I will sometimes refer to as Unix utilities) that perform a limited, well-defined function, which usually involves manipulating components (like files) in the unified file system that is also characteristic of Unix systems. Additionally Unix systems also have what is known as a command language or shell scripting language, called a <strong>Unix shell</strong>, with which users can call on these simple tools. Unix is also notable in that it is designed to be easily portable to a variety of different computers (distinguished from one another, mostly by the details of their CPU).</p>
+<h3><a class="header" href="#unix-like" id="unix-like">Unix-like</a></h3>
+<p>A <strong>unix-like</strong> operating system is one that behaves and to all the world seems like a Unix system, despite not being certified compliant to any version of the SUS. These systems can also be referred to as Unix clones. The only real practical difference between Unix and Unix-like systems are that Unix systems are usually developed by a commercial entity with the funds required to get their system SUS-certified.</p>
+<h3><a class="header" href="#nix" id="nix">*nix</a></h3>
+<p><strong>*nix</strong> is my shorthand way of referring collectively to both Unix and Unix-like systems. Despite this, you will also see other authors, including those that know far more than I do about these systems, using *nix to refer to just Unix-like systems.</p>
+<h3><a class="header" href="#linux" id="linux">Linux</a></h3>
+<p><strong>Linux</strong> is a large family of Unix-like operating systems (its members are referred to, collectively, as Linux distributions) that share one common defining characteristic: they use the Linux kernel as their kernel. The Linux kernel is a predominantly free and open-source kernel developed by Linus Torvalds who first started developing the kernel in 1991 when he was a 21-year-old computer science student studying at the University of Helsinki in Finland. I used the phrasing “predominantly free and open-source” deliberately, as while most of the kernel’s source code is licensed under the GNU GPL, there are some binary blobs on the kernel (which mostly just add to its compatibility with available hardware) that are not free and open-source.</p>
+<h3><a class="header" href="#gnu" id="gnu">GNU</a></h3>
+<p>The <strong>GNU Project</strong> is a FOSS project that was first founded in the 1980s by Richard M. Stallman (or rms), its stated mission is to develop a free and open-source Unix clone. This clone is referred to as GNU, which is incredibly unpopular. The GNU Project provides the Unix utilities (contained in the GNU Coreutils package) and the Unix shell (called Bash) used by the vast majority of Linux distributions. Due to this some people refer to the family of operating systems known as Linux, as GNU/Linux.</p>
+<h3><a class="header" href="#free-software-foundation" id="free-software-foundation">Free Software Foundation</a></h3>
+<p>The <strong>Free Software Foundation</strong> (<strong>FSF</strong>) non-profit organization set up by Stallman that advocates the widespread use of FOSS and was originally set up to hire people to develop software for the GNU Project. The FSF also provides its own set of predominantly copyleft licenses which includes the GNU GPL mentioned earlier.</p>
+<h3><a class="header" href="#linux-libre" id="linux-libre">Linux-libre</a></h3>
+<p>The <strong>Linux-libre kernel</strong> is essentially the Linux kernel with its binary blobs removed. This makes the kernel entirely free and open-source, as these binary blobs are proprietary software. A comparatively small number of Linux distributions use the libre kernel, these distributions are often called GNU/Linux-libre distributions and are fairly unpopular compared to their non-libre counterparts.</p>
+<h3><a class="header" href="#berkeley-software-distribution" id="berkeley-software-distribution">Berkeley Software Distribution</a></h3>
+<p>The <strong>Berkeley Software Distribution</strong> (<strong>BSD</strong>) is a Unix operating system that was developed at the University of California, Berkeley between 1977 and 1995. It was originally closed-source (that is, not open-source), but later releases were licensed under permissive BSD licenses. Since then several descendants of BSD have emerged with the most notable and popular one being FreeBSD. I use the terminology *BSD to collectively refer to BSD and its descendants.</p>
+<h3><a class="header" href="#file-archive" id="file-archive">File Archive</a></h3>
+<p>A <strong>file archive</strong> is a type of file, that stores one or more files, potentially with associated metadata, in a more portable and easily-compressed format. On Linux and other *nix systems, the most common type of file archive is a tar archive (which have the <code>.tar</code> file extension), with rar archives (file extension: <code>.rar</code>) being a popular alternative, especially for non-Linux platforms such as Windows. <code>tar</code> is a basic Unix utility, the specifics of this utility, its syntax, supported file formats, etc. is dependent on the *nix system it belongs to. Most Linux distributions use GNU tar as their default tar utility, but also have FreeBSD’s tar (usually called by the <code>bsdtar</code> command) utility available from their software repositories.</p>
+<h3><a class="header" href="#software-package" id="software-package">Software Package</a></h3>
+<p>Software packages are distributions (or packages) of software and data contained within a file archive. This archive is sometimes compressed so as to save space and make them easier to transfer over a network. Software packages usually also contain some metadata, that is, information about the contents of the package. Example software package formats include:</p>
+<ul>
+<li>Debian package format (file extension: <code>.deb</code>) — used by Debian’s dpkg package manager. They are archives created using the Unix <code>ar</code> utility.</li>
+<li>pacman package format (file extension: <code>.pkg.tar.xz</code>) — used by Arch Linux and other Linux distributions using the pacman package manager. They are xz-compressed tar archives.</li>
+<li>RPM package format (file extension: <code>.rpm</code>) — used by Red Hat’s RPM package manager.</li>
+</ul>
+<h3><a class="header" href="#package-management-system" id="package-management-system">Package Management System</a></h3>
+<p>A <strong>package management system</strong> (<strong>PMS</strong>, plural form: <strong>PMSs</strong>) or <strong>package manager</strong> is a collection of system software that automates the process of installing, configuring, removing and upgrading software packages. Traditionally Linux PMSs were operated solely from the command-line but nowadays several graphical PMSs also exist.</p>
+<h3><a class="header" href="#software-repository" id="software-repository">Software Repository</a></h3>
+<p>A <strong>software repository</strong> is essentially an archive of software packages from which package managers can download said packages and then install them.</p>
+<h3><a class="header" href="#linux-distribution" id="linux-distribution">Linux Distribution</a></h3>
+<p>A <strong>Linux distribution</strong> (<strong>LD</strong> or <strong>distro</strong>) is an individual, specific, operating system that uses the Linux kernel (that is, a specific member of the Linux family of operating systems). Most Linux distributions use GNU Project software for their Unix utilities, hence meaning that most Linux distributions can also be called <strong>GNU/Linux distributions</strong>. An LD consists of, at least, the following basic components:</p>
+<ul>
+<li>The <strong>Linux kernel</strong> (or the <strong>Linux-libre kernel</strong>, in some cases)</li>
+<li><strong>GNU Project software</strong>, such as Bash, the coreutils package, glibc, <em>etc</em>.</li>
+<li>A <strong>package management system</strong>, such as APT, DNF, Entropy, pacman, Portage, <em>etc</em>.</li>
+</ul>
+<h3><a class="header" href="#software-version-nomenclature" id="software-version-nomenclature">Software Version Nomenclature</a></h3>
+<p>In the field of software development, software releases are usually distinguished from one another by use of a numbering scheme. Each project has a different numbering scheme. The most common scheme is of the form:</p>
+<ul>
+<li><code>x.y.z</code>. <code>x</code>, <code>y</code> and <code>z</code> are all natural numbers (that is, <code>x</code>, <code>y</code>, <code>z</code> ∈ <code>{0, 1, 2, 3, ...}</code>). <code>x</code> is the major version of the software. Major versions have major feature differences in them, for example, the 4.0 Linux kernel had far more features than the 3.0 version of the Linux kernel. <code>y</code> is the minor version of the software. Minor software releases (where the only difference is the minor version number of the software. For example 4.6.0 is one minor release ahead of 4.5.0) usually only differ by a few, often minor features. <code>z</code> is the patch (or bug-fix) version of the software. If you are sick of my algebra I will give you an example of a program that follows this versioning scheme: the Linux kernel. An example version of the kernel is the 4.9.6 kernel. 4 is the major version, 9 is the minor version and 6 is the patch version.</li>
+</ul>
+<h3><a class="header" href="#release-models-fixed-vs-rolling" id="release-models-fixed-vs-rolling">Release Models: Fixed vs. Rolling</a></h3>
+<p>In the context of operating system development, there are two main types of release model: fixed and rolling. The most popular of these is the fixed <strong>release model</strong>, with the rolling release model being mostly used by bleeding edge operating systems geared towards advanced users like Arch Linux and Gentoo Linux.</p>
+<p>Operating systems that follow a <strong>fixed release model</strong> (<strong>FRM</strong>) have fixed releases, which users are required to upgrade to, in order to keep their system up-to-date. This upgrade process can be (1) via downloading or otherwise acquiring the installation media for the latest version and going through its installer, or (2) via the distribution’s package manager or other methods (e.g., Ubuntu uses the <code>do-release-upgrade</code> command). These upgrades usually include major updates for several pieces of software, including core system components like the kernel, C libraries, compilers, core utilities, etc. In my experience, this process takes hours, uses up a lot of bandwidth and usually breaks at least one program on one’s system. This is why I, personally, are not a big fan of systems following a FRM.</p>
+<p>Systems following a <strong>rolling release model</strong> (<strong>RRM</strong>) have no fixed releases, rather software updates, including major ones, simply become available for installation as soon as they have been packaged by the repository’s maintainers.</p>
+<h3><a class="header" href="#virtualization" id="virtualization">Virtualization</a></h3>
+<p><strong>Virtualization</strong> is the act of creating a virtual (rather than actual) version of something. Most commonly this “something” is an operating system. Virtualization is usually performed using computer programs that can be referred to as virtualization programs. In this context, the <strong>host</strong> is the computer being used to run the virtualization program, while the <strong>guest</strong> is the virtual system being run. For example, I am presently typing this glossary section on Arch Linux, so if I fire up a CentOS 7 VM in Oracle VM VirtualBox, then my host operating system would be Arch Linux and my guest operating system would be CentOS 7.</p>
+<h3><a class="header" href="#cross-distribution-package-formats" id="cross-distribution-package-formats">Cross-Distribution Package Formats</a></h3>
+<p>A <strong>cross-distribution package format</strong> (<strong>CDPF</strong>; plural form is <strong>CDPFs</strong>) are a type of Linux software package format that are designed to run on most, if not all, Linux distributions. There are four main, distinct CDPFs I am aware of:</p>
+<ul>
+<li>
+<p><a href="http://appimage.org/"><strong>AppImage</strong></a> (previously known as <strong>klik</strong>), a type of self-mounting image file (created using SquashFS) that contains all the libraries, executables, desktop configuration files, icon files, <em>etc</em>. used by the application it provides. They need no root privileges in order to be run and need no special package manager of their own, as unlike most package formats they are not installed. They are distinct from other CDPFs as they are not installed and unlike binary archives they need not be extracted in order to be run. They merely need to be marked as executable (with <code>chmod +x</code>) and run (with <code>./&lt;AppImage&gt;</code> where <code>&lt;AppImage&gt;</code> is the name of the AppImage, including its file extension. I have built quite a few AppImages, usually with the help of <a href="https://github.com/probonopd">Simon Peter</a>, the creator of this package format.</p>
+</li>
+<li>
+<p><strong>Binary archives</strong>, which have been aroud for decades are essentially archives (usually zipped or otherwise compressed) which contain all the libraries and executables required to run the program they provide on Linux. They need to be extracted in order for the program contained within to be run. SageMath and Scilab are both programs that are distributed like this.</p>
+</li>
+<li>
+<p><a href="http://flatpak.org/"><strong>Flatpak</strong></a> (previously known as <strong>xdg-app</strong>), a package format best supported (but not officially supported by) by the Fedora (for example, the <code>flatpak</code> package is in the official Fedora repositories) Linux distribution and the GNOME desktop environment. Most GNOME applications are officially available as Flatpaks. GNOME Software (a graphical front-end for package management) also has support for Flatpaks as of the 3.22.0 release. Flatpaks are installed using a package manager also known as Flatpak and called by the command <code>flatpak</code>. As one can probably guess one has to install the Flatpak package manager using your distribution’s respective package manager (e.g., APT, DNF, pacman, URPMI, Yum, ZYpp) in order to use it to install Flatpak packages. The only distributions I know of with Flatpak in its official repositories are: Arch Linux, Fedora and Manjaro Linux. CentOS, Debian, Gentoo, openSUSE and Ubuntu users have to use unofficial repositories in order to install it. Like most package managers, Flatpak requires administrative privileges in order to be run. Flatpaks are perhaps the most challenging package format to build, in my opinion.</p>
+</li>
+<li>
+<p><a href="http://snapcraft.io/"><strong>Snap</strong></a>, a package format officially developed by Canonical Ltd, the same company responsible for the development of the Ubuntu operating system. Like Flatpak it also requires its own package manager to be installed in order for one to run them. This package manager is written in Google’s Go programming language (which was first publically released in 2009, so it is fairly new). Snap packages are built using a program called <code>snapcraft</code> which is written in Python. The source files used to tell <code>snapcraft</code> how to build Snap packages and the metadata to include with them are yaml files that often call on plugins (written in Python) in order to build the Snap package. I have never built a Snap package from scratch as I do not understand Python well enough to write my own plugins, but I have managed to create custom packages using existing source files.</p>
+</li>
+</ul>
+<h3><a class="header" href="#governance" id="governance">Governance</a></h3>
+<p>In the context of open-source projects, the term <strong>governance</strong> refers to how the project is governed or lead. Some projects are <strong>authoritarian</strong> in governance, in other words they are dictatorships, with a single leader in charge. A notable example of such a project is the Slackware Linux Project. Others are <strong>donation-sponsored democracies</strong>, wherein the volunteer developers of the project usually have the power to make decisions via consensus. Likewise others are <strong>company-sponsored semi-democracies</strong>, wherein a company sponsors the project and has some say over decisions, but the majority of the authority to make decisions about the project resides with the community of volunteer developers (or so it should, whether it does in practise is something I will likely not know until I work in one).</p>
+<h2><a class="header" href="#acronyms" id="acronyms">Acronyms</a></h2>
+<blockquote>
+<p><strong>NOTE</strong></p>
+<blockquote>
+<ul>
+<li><em>Acronyms covered in the previous sections are not repeated in this list.</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Hyperlinks are to sources that explain, in greater detail, the term.</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<ul>
+<li><strong>ABS</strong>: <a href="https://wiki.archlinux.org/index.php/Arch_Build_System"><strong>Arch Build System</strong></a>, a system whereby all the PKGBUILDs, patch files and assorted other files used to build packages in the pacman repositories are stored in subdirectories of /var/abs. It is essentially Arch’s equivalent to the Portage Tree.</li>
+<li><strong>AUR</strong>: <a href="https://wiki.archlinux.org/index.php/Arch_User_Repository"><strong>Arch User Repository</strong></a>, a repository of Arch user-supplied PKGBUILDs, patch files and assorted other files that, while they are not used to build any packages in the pacman repositories, can (provided they do not have any bugs preventing them from building successfully, that is) be used to build Arch packages locally (on their own Arch machine) by users.</li>
+<li><strong>Deb</strong>: the package format used by Debian’s dpkg package manager.</li>
+<li><strong>PC</strong>: <strong>Personal computer</strong>. Can be a desktop or laptop, does not matter if it once ran OS X or Windows, still to me it is a PC.</li>
+<li><strong>RPM</strong>: <a href="http://rpm.org/"><strong>RPM Package Manager</strong></a>, originally <strong>Red Hat Package Manager</strong>. This is the name of both a package manager and the package format used by this package manager.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../Introduction/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../Pkg-Fmt/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../Introduction/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../Pkg-Fmt/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

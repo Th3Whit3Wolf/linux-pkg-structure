@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Arch Linux Packages - Linux Packaging Structure</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../Introduction/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li><a href="../Introduction/glossary.html"><strong aria-hidden="true">1.1.</strong> Glossary</a></li></ol></li><li><a href="../Pkg-Fmt/index.html"><strong aria-hidden="true">2.</strong> Package Formats</a></li><li><ol class="section"><li><a href="../Pkg-Fmt/alp.html" class="active"><strong aria-hidden="true">2.1.</strong> Arch Linux Packages</a></li><li><a href="../Pkg-Fmt/deb.html"><strong aria-hidden="true">2.2.</strong> Debian Packages</a></li><li><a href="../Pkg-Fmt/gen2.html"><strong aria-hidden="true">2.3.</strong> Gentoo/Sabayon Packages</a></li><li><a href="../Pkg-Fmt/rpm.html"><strong aria-hidden="true">2.4.</strong> RPM Packages</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Linux Packaging Structure</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#arch-linux-packages" id="arch-linux-packages">Arch Linux Packages</a></h1>
+<p><strong>Arch Linux packages</strong> are xz-compressed tar archives that are built and installed using commands provided by the <code>pacman</code> package on Arch Linux. ALPs are the package format used by Arch Linux derivatives (like Manjaro Linux) along with the “independent” distributions, Frugalware Linux and KaOS, which also use the pacman package manager, so this information should be applicable to packaging on these distributions too.</p>
+<h3><a class="header" href="#alp-contents" id="alp-contents">ALP Contents</a></h3>
+<p>ALPs have the following contents:</p>
+<pre><code class="language-sh">$INSTALLED_FILES
+.BUILDINFO
+.INSTALL
+.MTREE
+.PKGINFO
+</code></pre>
+<p>where <code>$INSTALLED_FILES</code> are, of course, the installed files of the package with its respective file structure. For example, for the <code>broadcom-wl</code> package the <code>$INSTALLED_FILES</code> have the directory structure:</p>
+<pre><code class="language-sh">usr/
+ - lib/
+   - modprobe.d/
+     - broadcom-wl.conf
+   - modules/
+     - extramodules-4.4-ARCH/
+       - wl.ko.gz
+ - share/
+   - licenses/
+     - broadcom-wl/
+       - LICENSE
+</code></pre>
+<p>The package metadata (which is used by pacman when it installs new packages to check for file conflicts and such) is stored in the four hidden files (that is, those with . in their filename) in the package’s top-level directory.</p>
+<h3><a class="header" href="#pkgbuild-structure" id="pkgbuild-structure">PKGBUILD Structure</a></h3>
+<p>ALPs are built from PKGBUILDs using the <code>makepkg</code> command that comes bundled with the pacman package manager. They are the easiest packages to build, in my opinion. PKGBUILDs have the following general format (for more details see the <a href="https://fusion809.github.io/man/PKGBUILD.5.html">PKGBUILD(5)</a> man page):</p>
+<pre><code class="language-sh"># ~ Maintainer/Contributor name and email ~
+pkgname=      # The package's name.
+pkgver=       # The upstream package version, e.g., 1.5.0 for Atom 1.5.0.
+pkgrel=       # The PKGBUILD revision number.
+pkgdesc=      # The PKGBUILD's description.
+arch=         # The architecture(s) on which the package is to be built.
+url=          # The website of the package.
+license=      # The legal license of the package.
+depends=      # Runtime dependencies.
+makedepends=  # Build dependencies.
+optdepends=   # Optional dependencies.
+provides=     # What the package provides.
+conflicts=    # The package conflicts.
+source=       # The source files required; also includes patches.
+sha256sums=   # SHA256 sums of the source files.
+md5sums=      # MD5 sums of the source files. Usually used INSTEAD of sha256sums.
+install=      # Install files.
+
+prepare() {   # Prepare the sources. Most commonly you will find sed functions
+}             # and patches being applied here.
+
+build() {     # Perform any compiling of the source code that may be necessary.
+}             # You may also see configure scripts being run here.
+
+package() {   # This will actually build the package. If more than one package is
+}             # built from the one PKGBUILD then more than one package() function is provided.
+</code></pre>
+<p>the <code>sha256sums</code> can be replaced with <code>sha512sums</code> and sometimes GPG signatures are used also. For example, the Linux kernel PKGBUILD, in the core pacman repository, uses GPG and sha256sums to check package integrity and validity. The variable definition lines (that is, the <code>pkgname</code> line through to <code>install</code> line) provide mostly the package’s metadata and security checks (as well as variables that can be used in the following functions), while the <code>prepare(),</code> <code>build()</code> and <code>package()</code> functions are responsible for the actual building of the package. The <code>install</code> line defines the <code>.install</code> file that contains pre-, peri- and post-install checks and functions that need to be executed for the package. Here is an example PKGBUILD I have used to build gVim 7.4.1525:</p>
+<pre><code class="language-sh"># Maintainer: Brenton Horne &lt;brentonhorne77 at gmail dot com&gt;
+# Contributor: Peter Mattern &lt;pmattern at arcor dot de&gt;
+
+_pkgname=vim
+pkgname=&quot;gvim&quot;
+pkgver=7.4.1525
+pkgrel=1
+pkgdesc=&quot;Vim the editor. CLI version and GTK2 GUI providing majority of features.&quot;
+arch=(&quot;i686&quot; &quot;x86_64&quot;)
+url=&quot;http://www.vim.org&quot;
+license=(&quot;custom:vim&quot;)
+depends=(&quot;gtk2&quot; &quot;hicolor-icon-theme&quot; &quot;gtk-update-icon-cache&quot; &quot;desktop-file-utils&quot;)
+optdepends=(&quot;lua: Lua interpreter&quot; &quot;perl: Perl interpreter&quot; &quot;python: Python 3 interpreter&quot;
+            &quot;python2: Python 2 interpreter&quot; &quot;ruby: Ruby interpreter&quot;)
+makedepends=(&quot;lua&quot; &quot;python&quot; &quot;python2&quot; &quot;ruby&quot;)
+provides=(&quot;gvim&quot; &quot;xxd&quot; &quot;vim-runtime&quot;)
+conflicts=(&quot;vim-minimal-git&quot; &quot;vim-git&quot;
+           &quot;vim-minimal&quot; &quot;vim&quot; &quot;vim-python3&quot; &quot;gvim&quot; &quot;gvim-python3&quot;)
+source=(&quot;https://github.com/vim/vim/archive/v$pkgver.tar.gz&quot;
+        &quot;gvim.desktop&quot;)
+sha256sums=('SKIP'
+            'c346da4725b2db6f7b58c5b72bdf9e7efbba2a3275e97c17db48689e4de674ca')
+install=gvim.install
+
+prepare() {
+
+    # set global configuration files to /etc/[g]vimrc
+    sed -i 's|^.*\(#define SYS_.*VIMRC_FILE.*&quot;\) .*$|\1|' ${srcdir}/${_pkgname}-${pkgver}/src/feature.h
+
+}
+
+build() {
+
+    cd &quot;${srcdir}/${_pkgname}-${pkgver}&quot;
+    ./configure \
+      --enable-fail-if-missing \
+      --with-compiledby='Arch Linux AUR' \
+      --prefix=/usr \
+      --enable-gui=gtk2 \
+      --with-features=huge \
+      --enable-cscope \
+      --enable-multibyte \
+      --enable-perlinterp=dynamic \
+      --enable-pythoninterp=dynamic \
+      --enable-python3interp=dynamic \
+      --enable-rubyinterp=dynamic \
+      --enable-luainterp=dynamic
+    make
+
+}
+
+package() {
+
+    # actual installation
+    cd &quot;${srcdir}/${_pkgname}-${pkgver}&quot;
+    make DESTDIR=$pkgdir install
+
+    # desktop entry file and corresponding icon
+    install -D -m644 ../gvim.desktop      $pkgdir/usr/share/applications/gvim.desktop
+    install -D -m644 runtime/vim48x48.png $pkgdir/usr/share/icons/hicolor/48x48/apps/gvim.png
+
+    # remove ex/view and man pages (normally provided by package 'vi' on Arch Linux)
+    cd $pkgdir/usr/bin ; rm ex view
+    find $pkgdir/usr/share/man -type d -name 'man1' 2&gt;/dev/null | \
+      while read _mandir; do
+        cd ${_mandir}
+        rm -f ex.1 view.1
+      done
+
+    # add license
+    install -D -m644 ${srcdir}/${_pkgname}-${pkgver}/runtime/doc/uganda.txt \
+      $pkgdir/usr/share/licenses/$pkgname/LICENSE
+}
+</code></pre>
+<p><code>prepare()</code> is used to <em>prepare</em> the source, which means if the source is compressed (like a gz-compressed tar archive) the <code>prepare()</code> function will exact its contents so that they are available for the <code>build()</code> and <code>package()</code> functions. <code>build()</code> is used to build, or compile, the source, that is if this needs to be done (for example, some PKGBUILDs actually build ALPs from Debian or RPM packages, so no source code compiling is required). <code>package()</code> is what builds a package from either the compiled source (that is, the source after the <code>build()</code> function is run) or the prepared pre-compiled sources (that is, the contents of Debian/RPM binaries).</p>
+<p>The <code>package()</code> function is essentially where the objective of the game is to move all the files you wish to be in the end package from the products (whether it be compiled source code, or unpacked Debian package contents) of the <code>build()</code> function into the <code>$pkgdir</code> directory. The <code>$pkgdir</code> directory is meant to have the same internal file system structure as where the package will place its installed files, if installed on one’s file system. For example, GTK themes are usually installed to <code>/usr/share/themes</code> so this is an example <code>package()</code> function for such cases (this one is specifically taken from the <code>osx-el-capitan-theme</code> PKGBUILD):</p>
+<pre><code class="language-sh">package() {
+  mkdir -p &quot;$pkgdir/usr/share/themes/&quot;
+  cp -a &quot;$srcdir/${_pkgname}-${pkgver}/OS X El Capitan&quot; &quot;$pkgdir/usr/share/themes/&quot;
+}
+</code></pre>
+<p>see the package’s contents are moved to <code>${pkgdir}/usr/share/themes/OS X El Capitan</code>.</p>
+<h3><a class="header" href="#building-alps" id="building-alps">Building ALPs</a></h3>
+<p>To build an ALP you run:</p>
+<pre><code class="language-sh">user $  makepkg
+</code></pre>
+<p>from within the same directory, as the PKGBUILD you intend to build is located. You may not have the package’s build dependencies pre-installed so this command may return an error stating that you have missing build dependencies. To fix this (assuming all the dependencies are in the presently-enabled pacman repositories) by installing all required build dependencies prior to the build, run:</p>
+<pre><code class="language-sh">user $  makepkg -s
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../Pkg-Fmt/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../Pkg-Fmt/deb.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../Pkg-Fmt/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../Pkg-Fmt/deb.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
